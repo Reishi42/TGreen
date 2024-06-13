@@ -304,8 +304,11 @@ proc/russian_text2html(msg)
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
-/proc/capitalize(var/t as text)
-	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2, 0)
+/proc/capitalize(t)
+	. = t
+	if(t)
+		. = t[1]
+		return uppertext(.) + copytext(t, 1 + length(.))
 
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
