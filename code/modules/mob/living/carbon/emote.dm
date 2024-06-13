@@ -19,19 +19,19 @@
 	switch(act)//Even carbon organisms want it alphabetically ordered..
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ&#255;пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!"
 				m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> моргает."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("blink_r")
-			message = "<B>[src]</B> быстро моргает."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("blush")
-			message = "<B>[src]</B> краснеет."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("bow")
@@ -45,9 +45,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> пїЅпїЅпїЅпїЅ&#255;пїЅпїЅпїЅ&#255; [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> пїЅпїЅпїЅпїЅ&#255;пїЅпїЅпїЅ&#255;."
 			m_type = 1
 
 		if ("burp")
@@ -58,106 +58,106 @@
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт громкий шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("chuckle")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("clap")
 			if (!src.restrained())
-				message = "<B>[src]</B> аплодирует."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("cough")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт громкий шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("deathgasp")
-			message = "<B>[src]</B> содрогаетс&#255; в последний раз, безжизненный взгл&#255;д застывает..."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255; пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ&#255;пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ..."
 			m_type = 1
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ&#255;пїЅпїЅ."
 				m_type = 2
 
 		if ("gasp")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт тихий шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("giggle")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("laugh")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 
 		if ("nod")
-			message = "<B>[src]</B> кивает."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("scream")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт очень громкий шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("shake")
-			message = "<B>[src]</B> качает головой."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("sneeze")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт странный звук."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("sigh")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> вздыхает."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("sniff")
-			message = "<B>[src]</B> шмыгает носом."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("snore")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("whimper")
 			if (!muzzled)
 				..(act)
 			else
-				message = "<B>[src]</B> издаёт тихий шум."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("wink")
-			message = "<B>[src]</B> подмигивает."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("yawn")
@@ -165,7 +165,7 @@
 				..(act)
 
 		if ("help")
-			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ \"*emote\" пїЅ \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

@@ -15,41 +15,41 @@
 
 	switch(act) //Alphabetical please
 		if("bounce")
-			message = "<B>The [src.name]</B> подпрыгивает на месте."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if("jiggle")
-			message = "<B>The [src.name]</B> покачиваетс&#255;!"
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;!"
 			m_type = 1
 
 		if("light")
-			message = "<B>The [src.name]</B> засветилс&#255; на мгновение, но погас."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255; пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if("moan")
-			message = "<B>The [src.name]</B> стонет."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if("shiver")
-			message = "<B>The [src.name]</B> дрожит."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if("sway")
-			message = "<B>The [src.name]</B> шатаетс&#255;."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;."
 			m_type = 1
 
 		if("twitch")
-			message = "<B>The [src.name]</B> дергаетс&#255;."
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;."
 			m_type = 1
 
 		if("vibrate")
-			message = "<B>The [src.name]</B> вибрирует!"
+			message = "<B>The [src.name]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!"
 
 		if ("help") //This is an exception
-			src << "Список эмоций дл&#255; метроидов. Вы можете использовать их, набрав \"*emote\" в \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
+			src << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ \"*emote\" пїЅ \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
 
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅ&#255; '[act]'. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"*help\" пїЅ \"say\" пїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</span>"
 
 	if ((message && stat == CONSCIOUS))
 		if(client)

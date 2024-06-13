@@ -574,7 +574,7 @@
 			if(href_list["del"]==S.id)
 				D=S
 				break
-		replacetext_old(possible_destinations,"[D.id];","")
+		replacetext_char_old(possible_destinations,"[D.id];","")
 		D.Desintegrate()
 		return updateUsrDialog()
 

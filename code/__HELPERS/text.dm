@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext_char(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
 
 /proc/format_table_name(var/table as text)
 	return sqlfdbktableprefix + table
@@ -28,20 +28,20 @@
 //Simply removes < and > and limits the length of the message
 /proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
 	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
+	t = copytext_char(t,1,limit)
 	for(var/char in strip_chars)
 		var/index = findtext(t, char)
 		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
+			t = copytext_char(t, 1, index) + copytext_char(t, index+1)
 			index = findtext(t, char)
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "ÿ"="&#255;"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "ï¿½"="&#255;"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
+			t = copytext_char(t, 1, index) + repl_chars[char] + copytext_char(t, index+1)
 			index = findtext(t, char, index+1)
 	return t
 
@@ -51,17 +51,17 @@ proc/sanitize_russian(var/msg, var/html = 0)
         rep = "&#1103;"
     else
         rep = "&#255;"
-    var/index = findtext(msg, "ÿ")
+    var/index = findtext(msg, "ï¿½")
     while(index)
-        msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
-        index = findtext(msg, "ÿ")
+        msg = copytext_char(msg, 1, index) + rep + copytext_char(msg, index + 1)
+        index = findtext(msg, "ï¿½")
     return msg
 
 proc/russian_html2text(msg)
-    return replacetext(msg, "&#1103;", "&#255;")
+    return replacetext_char(msg, "&#1103;", "&#255;")
 
 proc/russian_text2html(msg)
-	return replacetext(msg, "&#255;", "&#1103;")
+	return replacetext_char(msg, "&#255;", "&#1103;")
 
 //Runs byond's sanitization proc along-side sanitize_simple
 /proc/sanitize(var/t,var/list/repl_chars = null)
@@ -70,12 +70,12 @@ proc/russian_text2html(msg)
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
+	return copytext_char((sanitize(strip_html_simple(t))),1,limit)
 
 //Runs byond's sanitization proc along-side strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((rhtml_encode(strip_html_simple(t))),1,limit)
+	return copytext_char((rhtml_encode(strip_html_simple(t))),1,limit)
 
 
 //Returns null if there is any bad text in the string
@@ -158,7 +158,7 @@ proc/russian_text2html(msg)
 	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		t_out = copytext(t_out,1,length(t_out))	//removes the last character (in this case a space)
+		t_out = copytext_char(t_out,1,length(t_out))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
 		if(cmptext(t_out,bad_name))	return	//(not case sensitive)
@@ -172,7 +172,7 @@ proc/russian_text2html(msg)
 		return
 
 	if(max_length)
-		input = copytext(input,1,max_length)
+		input = copytext_char(input,1,max_length)
 
 	var/sanitized_output
 	var/next_html_tag = findtext(input, "<")
@@ -182,7 +182,7 @@ proc/russian_text2html(msg)
 	var/opening = non_zero_min(next_html_tag, next_http)
 	var/closing
 
-	sanitized_output = copytext(input, 1, opening)
+	sanitized_output = copytext_char(input, 1, opening)
 
 	while(next_html_tag || next_http)
 
@@ -208,9 +208,9 @@ proc/russian_text2html(msg)
 		//check if we've something to skip
 		if(closing)
 			opening = non_zero_min(next_html_tag, next_http)
-			sanitized_output += copytext(input, closing + 1, opening)
+			sanitized_output += copytext_char(input, closing + 1, opening)
 
-	sanitized_output += copytext(input, opening) //don't forget the remaining text
+	sanitized_output += copytext_char(input, opening) //don't forget the remaining text
 
 	return sanitized_output
 
@@ -260,10 +260,10 @@ proc/russian_text2html(msg)
  * Text modification
  */
 
-/proc/replacetext_old(text, find, replacement)
+/proc/replacetext_char_old(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
 
-/proc/replacetextEx_old(text, find, replacement)
+/proc/replacetext_charEx_old(text, find, replacement)
 	return list2text(text2listEx(text, find), replacement)
 
 //Adds 'u' number of zeros ahead of the text 't'
@@ -288,14 +288,14 @@ proc/russian_text2html(msg)
 /proc/trim_left(text)
 	for (var/i = 1 to length(text))
 		if (text2ascii(text, i) > 32)
-			return copytext(text, i)
+			return copytext_char(text, i)
 	return ""
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
 	for (var/i = length(text), i > 0, i--)
 		if (text2ascii(text, i) > 32)
-			return copytext(text, 1, i + 1)
+			return copytext_char(text, 1, i + 1)
 
 	return ""
 
@@ -305,7 +305,7 @@ proc/russian_text2html(msg)
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2, 0)
 
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
@@ -315,7 +315,7 @@ proc/russian_text2html(msg)
 	if(size == length)
 		return new_message
 	if(size > length)
-		return copytext(new_message, 1, length + 1)
+		return copytext_char(new_message, 1, length + 1)
 	if(delta == 1)
 		return new_message + " "
 	if(delta % 2)
@@ -329,7 +329,7 @@ proc/russian_text2html(msg)
 	var/size = length(message)
 	if(size <= length)
 		return message
-	return copytext(message, 1, length + 1)
+	return copytext_char(message, 1, length + 1)
 
 
 /proc/stringmerge(var/text,var/compare,replace = "*")
@@ -337,18 +337,18 @@ proc/russian_text2html(msg)
 //is in the other string at the same spot (assuming it is not a replace char).
 //This is used for fingerprints
 	var/newtext = text
-	if(lentext(text) != lentext(compare))
+	if(length(text) != length(compare))
 		return 0
-	for(var/i = 1, i < lentext(text), i++)
-		var/a = copytext(text,i,i+1)
-		var/b = copytext(compare,i,i+1)
+	for(var/i = 1, i < length(text), i++)
+		var/a = copytext_char(text,i,i+1)
+		var/b = copytext_char(compare,i,i+1)
 //if it isn't both the same letter, or if they are both the replacement character
 //(no way to know what it was supposed to be)
 		if(a != b)
 			if(a == replace) //if A is the replacement char
-				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + b + copytext_char(newtext, i+1)
 			else if(b == replace) //if B is the replacement char
-				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + a + copytext_char(newtext, i+1)
 			else //The lists disagree, Uh-oh!
 				return 0
 	return newtext
@@ -359,8 +359,8 @@ proc/russian_text2html(msg)
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= lentext(text), i++)
-		var/a = copytext(text,i,i+1)
+	for(var/i = 1, i <= length(text), i++)
+		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
 	return count
@@ -368,7 +368,7 @@ proc/russian_text2html(msg)
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
 	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
+		new_text += copytext_char(text, i, i+1)
 	return new_text
 
 var/list/zero_character_only = list("0")
@@ -397,7 +397,7 @@ var/list/binary = list("0","1")
 		t = "0[t]"
 	temp1 = t
 	if (length(t) > u)
-		temp1 = copytext(t,2,u+1)
+		temp1 = copytext_char(t,2,u+1)
 	return temp1
 
 //merges non-null characters (3rd argument) from "from" into "into". Returns result
@@ -420,19 +420,19 @@ var/list/binary = list("0","1")
 		var/ascii = text2ascii(from, i)
 		if(ascii == null_ascii)
 			if(previous != 1)
-				. += copytext(from, start, i)
+				. += copytext_char(from, start, i)
 				start = i
 				previous = 1
 		else
 			if(previous != 0)
-				. += copytext(into, start, i)
+				. += copytext_char(into, start, i)
 				start = i
 				previous = 0
 
 	if(previous == 0)
-		. += copytext(from, start, end)
+		. += copytext_char(from, start, end)
 	else
-		. += copytext(into, start, end)
+		. += copytext_char(into, start, end)
 
 //finds the first occurrence of one of the characters from needles argument inside haystack
 //it may appear this can be optimised, but it really can't. findtext() is so much faster than anything you can do in byondcode.
@@ -441,7 +441,7 @@ var/list/binary = list("0","1")
 	var/temp
 	var/len = length(needles)
 	for(var/i=1, i<=len, i++)
-		temp = findtextEx(haystack, ascii2text(text2ascii(needles,i)), start, end)	//Note: ascii2text(text2ascii) is faster than copytext()
+		temp = findtextEx(haystack, ascii2text(text2ascii(needles,i)), start, end)	//Note: ascii2text(text2ascii) is faster than copytext_char()
 		if(temp)	end = temp
 	return end
 
@@ -450,29 +450,29 @@ var/list/binary = list("0","1")
 	if(length(t) < 1)		//No input means nothing needs to be parsed
 		return
 
-	t = replacetext(t, "\[center\]", "<center>")
-	t = replacetext(t, "\[/center\]", "</center>")
-	t = replacetext(t, "\[br\]", "<BR>")
-	t = replacetext(t, "\[b\]", "<B>")
-	t = replacetext(t, "\[/b\]", "</B>")
-	t = replacetext(t, "\[i\]", "<I>")
-	t = replacetext(t, "\[/i\]", "</I>")
-	t = replacetext(t, "\[u\]", "<U>")
-	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[large\]", "<font size=\"4\">")
-	t = replacetext(t, "\[/large\]", "</font>")
+	t = replacetext_char(t, "\[center\]", "<center>")
+	t = replacetext_char(t, "\[/center\]", "</center>")
+	t = replacetext_char(t, "\[br\]", "<BR>")
+	t = replacetext_char(t, "\[b\]", "<B>")
+	t = replacetext_char(t, "\[/b\]", "</B>")
+	t = replacetext_char(t, "\[i\]", "<I>")
+	t = replacetext_char(t, "\[/i\]", "</I>")
+	t = replacetext_char(t, "\[u\]", "<U>")
+	t = replacetext_char(t, "\[/u\]", "</U>")
+	t = replacetext_char(t, "\[large\]", "<font size=\"4\">")
+	t = replacetext_char(t, "\[/large\]", "</font>")
 	if(user)
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user.real_name]</i></font>")
+		t = replacetext_char(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user.real_name]</i></font>")
 	else
-		t = replacetext(t, "\[sign\]", "")
-	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
+		t = replacetext_char(t, "\[sign\]", "")
+	t = replacetext_char(t, "\[field\]", "<span class=\"paper_field\"></span>")
 
-	t = replacetext(t, "\[*\]", "<li>")
-	t = replacetext(t, "\[hr\]", "<HR>")
-	t = replacetext(t, "\[small\]", "<font size = \"1\">")
-	t = replacetext(t, "\[/small\]", "</font>")
-	t = replacetext(t, "\[list\]", "<ul>")
-	t = replacetext(t, "\[/list\]", "</ul>")
+	t = replacetext_char(t, "\[*\]", "<li>")
+	t = replacetext_char(t, "\[hr\]", "<HR>")
+	t = replacetext_char(t, "\[small\]", "<font size = \"1\">")
+	t = replacetext_char(t, "\[/small\]", "</font>")
+	t = replacetext_char(t, "\[list\]", "<ul>")
+	t = replacetext_char(t, "\[/list\]", "</ul>")
 	return t
 
 /proc/rhtml_encode(var/msg, var/html = 0)
@@ -482,7 +482,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "ÿ")
+	var/list/c = text2list(msg, "ï¿½")
 	if(c.len == 1)
 		return html_encode(msg)
 	var/out = ""
@@ -500,7 +500,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "ÿ")
+	var/list/c = text2list(msg, "ï¿½")
 	if(c.len == 1)
 		return html_decode(msg)
 	var/out = ""
@@ -515,25 +515,25 @@ var/list/binary = list("0","1")
 
 /*
 /proc/reject_bad_endings(text as text)
-	var/symbol = copytext(text,-1)
+	var/symbol = copytext_char(text,-1)
 	if (symbol in list("*", ",", "/", "\\", "|", "+", "-", ":", "<", ">", "(", ")", ";"))
-		return replacetext(text, symbol, "")
+		return replacetext_char(text, symbol, "")
 
 /proc/rusdecapitalize(var/t as text)
 	var/s = 2
-	if (copytext(t,1,2) == "*")
+	if (copytext_char(t,1,2) == "*")
 		s += 1
-		if (copytext(t,2,3) == " ")
+		if (copytext_char(t,2,3) == " ")
 			s += 1
-	return lowerrustext(copytext(t, 1, s)) + copytext(t, s)
+	return lowerrustext(copytext_char(t, 1, s)) + copytext_char(t, s)
 */
 
 /proc/pointization(text as text)
 	if (!text)
 		return
-	if (copytext(text,1,2) == "*") //Emotes allowed.
+	if (copytext_char(text,1,2) == "*") //Emotes allowed.
 		return text
-	if (copytext(text,-1) in list("!", "?", "."))
+	if (copytext_char(text,-1) in list("!", "?", "."))
 		return text
 	text += "."
 	return text
@@ -541,17 +541,17 @@ var/list/binary = list("0","1")
 
 /proc/ruscapitalize(var/t as text)
 	var/s = 2
-	if (copytext(t,1,2) == ";")
+	if (copytext_char(t,1,2) == ";")
 		s += 1
-	else if (copytext(t,1,2) == ":")
-		if(copytext(t,3,4) == " ")
+	else if (copytext_char(t,1,2) == ":")
+		if(copytext_char(t,3,4) == " ")
 			s+=3
 		else
 			s+=2
-	return upperrustext(copytext(t, 1, s)) + copytext(t, s)
+	return upperrustext(copytext_char(t, 1, s)) + copytext_char(t, s)
 
 /proc/intonation(text)
-	if (copytext(text,-1) == "!")
+	if (copytext_char(text,-1) == "!")
 		text = "<b>[text]</b>"
 	return text
 
@@ -564,8 +564,8 @@ var/list/binary = list("0","1")
 		else if (a == 184)
 			t += ascii2text(168)
 		else t += ascii2text(a)
-	t = replacetext(t,"&#255;","ß")
-	t = replacetext(t, "ÿ", "ß")
+	t = replacetext_char(t,"&#255;","ï¿½")
+	t = replacetext_char(t, "ï¿½", "ï¿½")
 	return t
 
 
@@ -578,5 +578,5 @@ var/list/binary = list("0","1")
 		else if (a == 168)
 			t += ascii2text(184)
 		else t += ascii2text(a)
-	t = replacetext(t,"ß","&#255;")
+	t = replacetext_char(t,"ï¿½","&#255;")
 	return t

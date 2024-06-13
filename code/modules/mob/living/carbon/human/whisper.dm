@@ -22,7 +22,7 @@
 
 	var/alt_name = get_alt_name()
 
-	var/whispers = "шепчет"
+	var/whispers = "пїЅпїЅпїЅпїЅпїЅпїЅ"
 	var/critical = InCritical()
 
 	// We are unconscious but not in critical, so don't allow them to whisper.
@@ -36,7 +36,7 @@
 		var/message_len = length(message)
 		message = copytext(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
 		message = Ellipsis(message, 10, 1)
-		whispers = "прошептал[src.gender=="male" ? "" : "а"] на последнем дыхании"
+		whispers = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ[src.gender=="male" ? "" : "пїЅ"] пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 
 	message = treat_message(message)
 
@@ -55,7 +55,7 @@
 
 	var/rendered
 
-	rendered = "<span class='game say'><span class='name'>[src.name]</span> что-то [whispers].</span>"
+	rendered = "<span class='game say'><span class='name'>[src.name]</span> пїЅпїЅпїЅ-пїЅпїЅ [whispers].</span>"
 	for(var/mob/M in watching)
 		M.show_message(rendered, 2)
 

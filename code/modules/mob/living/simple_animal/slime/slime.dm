@@ -16,8 +16,8 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
-	emote_see = list("покачиваетс&#255;.", "подпрыгивает на месте.")
-	speak_emote = list("трещит")
+	emote_see = list("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;.", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.")
+	speak_emote = list("пїЅпїЅпїЅпїЅпїЅпїЅ")
 
 	layer = 5
 
@@ -31,11 +31,11 @@
 
 	see_in_dark = 8
 
-	verb_say = "телепатически шепчет"
+	verb_say = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
 	verb_engsay = "chirps"
-	verb_ask = "телепатически спрашивает"
-	verb_exclaim = "телепатически кричит"
-	verb_yell = "телепатически вопит"
+	verb_ask = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+	verb_exclaim = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
+	verb_yell = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"
 
 	// canstun and canweaken don't affect slimes because they ignore stun and weakened variables
 	// for the sake of cleanliness, though, here they are.
@@ -83,7 +83,7 @@
 		icon_dead = "[icon_state] dead"
 		real_name = name
 		slime_mutation = mutation_table(colour)
-		var/sanitizedcolour = replacetext(colour, " ", "")
+		var/sanitizedcolour = replacetext_char(colour, " ", "")
 		coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
 	..()
 

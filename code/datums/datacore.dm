@@ -181,8 +181,8 @@
 			even = !even
 
 	dat += "</table>"
-	dat = replacetext(dat, "\n", "")
-	dat = replacetext(dat, "\t", "")
+	dat = replacetext_char(dat, "\n", "")
+	dat = replacetext_char(dat, "\t", "")
 	return dat
 
 

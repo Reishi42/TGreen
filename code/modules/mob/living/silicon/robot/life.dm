@@ -154,7 +154,7 @@
 					healths.icon_state = "health3"
 				if(-50 to 0)
 					healths.icon_state = "health4"
-				if(config.health_threshold_dead to -50)
+				if(-99 to -51)
 					healths.icon_state = "health5"
 				else
 					healths.icon_state = "health6"

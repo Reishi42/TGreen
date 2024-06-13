@@ -39,7 +39,7 @@
 /datum/species/lizard/handle_speech(message)
 	// jesus christ why
 	if(copytext(message, 1, 2) != "*")
-		message = replacetext(message, "s", "sss")
+		message = replacetext_char(message, "s", "sss")
 
 	return message
 
@@ -269,7 +269,7 @@
 		return 1
 
 /datum/species/fly/handle_speech(message)
-	return replacetext(message, "z", stutter("zz"))
+	return replacetext_char(message, "z", stutter("zz"))
 
 /*
  SKELETONS

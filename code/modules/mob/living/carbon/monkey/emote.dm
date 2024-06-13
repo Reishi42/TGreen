@@ -15,45 +15,45 @@
 
 	switch(act) //Ooh ooh ah ah keep this alphabetical ooh ooh ah ah!
 		if ("deathgasp")
-			message = "<b>[src]</b> перестаёт шевелитьс&#255;, издав слабый крик..."
+			message = "<b>[src]</b> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ..."
 			m_type = 1
 
 		if ("gnarl")
 			if (!muzzled)
-				message = "<B>[src]</B> изворачиваетс&#255;, оскалив свои зубы"
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"
 				m_type = 2
 
 		if ("paw")
 			if (!src.restrained())
-				message = "<B>[src]</B> крутит лапами."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ."
 				m_type = 1
 
 		if ("moan")
-			message = "<B>[src]</B> охает!"
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ!"
 			m_type = 2
 
 		if ("roar")
 			if (!muzzled)
-				message = "<B>[src]</B> рычит."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ."
 				m_type = 2
 
 		if ("roll")
 			if (!src.restrained())
-				message = "<B>[src]</B> кувыркаетс&#255;."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;."
 				m_type = 1
 
 		if ("scratch")
 			if (!src.restrained())
-				message = "<B>[src]</B> чешетс&#255;."
+				message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ&#255;."
 				m_type = 1
 
 		if ("scretch")
 			if (!muzzled)
-				message = "<B>[src]</B> пот&#255;гиваетс&#255;."
+				message = "<B>[src]</B> пїЅпїЅпїЅ&#255;пїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;."
 				m_type = 2
 
 		if ("shiver")
-			message = "<B>[src]</B> дрожит."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("sign")
@@ -62,11 +62,11 @@
 				m_type = 1
 
 		if ("tail")
-			message = "<B>[src]</B> машет хвостом."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("help") //Ooh ah ooh ooh this is an exception to alphabetical ooh ooh.
-			src << "Список эмоций дл&#255; обезь&#255;н. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, gnarl, giggle, glare-(none)/mob, grin, jump, laugh, look, me, moan, nod, paw, point-(atom), roar, roll, scream, scratch, scretch, shake, shiver, sigh, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅ&#255;пїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ \"*emote\" пїЅ \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, gnarl, giggle, glare-(none)/mob, grin, jump, laugh, look, me, moan, nod, paw, point-(atom), roar, roll, scream, scratch, scretch, shake, shiver, sigh, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

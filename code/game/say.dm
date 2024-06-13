@@ -65,8 +65,8 @@ var/list/freqtospan = list(
 /atom/movable/proc/say_quote(input, list/spans)
 	if(!input)
 		return "ГЈГ®ГўГ®Г°ГЁГІ, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
-	var/ending = copytext(input, length(input))
-	if(copytext(input, length(input) - 1) == "!!")
+	var/ending = copytext_char(input, length(input))
+	if(copytext_char(input, length(input) - 1) == "!!")
 		if(islist(spans))
 			spans |= SPAN_YELL
 			return "[verb_yell], \"[attach_spans(input, spans)]\""
@@ -94,17 +94,17 @@ var/list/freqtospan = list(
 		else
 			return speaker.say_quote(stars(raw_message), spans)
 	else if(message_langs & MONKEY)
-		return "щебечет."
+		return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 	else if(message_langs & ALIEN)
-		return "шипит."
+		return "пїЅпїЅпїЅпїЅпїЅ."
 	else if(message_langs & ROBOT)
-		return "издаёт сигнал."
+		return "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ."
 	else if(message_langs & DRONE)
-		return "издаёт сигнал."
+		return "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ."
 	else if(message_langs & CAT)
-		return "мурчит."
+		return "пїЅпїЅпїЅпїЅпїЅпїЅ."
 	else
-		return "издаёт странный звук."
+		return "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ."
 
 /proc/get_radio_span(freq)
 	var/returntext = freqtospan["[freq]"]

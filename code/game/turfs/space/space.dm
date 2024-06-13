@@ -198,7 +198,7 @@ proc/setup_map_transitions() //listamania
 		if(z_level > world.maxz) //A safety if one of the unplaced_z_levels doesn't actually exist
 			z_level =  6
 		placement = pick(free_zones)
-		text_zone_connections = replacetext(text_zone_connections, placement, "[z_level]")
+		text_zone_connections = replacetext_char(text_zone_connections, placement, "[z_level]")
 
 		for(var/turf/space/S in turfs_needing_transition) //pass the identity zone to the relevent turfs
 			if(S.transition && prob(50)) //In z = 6 (deep space) it's a bit of a crapshoot in terms of navigation
@@ -214,7 +214,7 @@ proc/setup_map_transitions() //listamania
 		unplaced_z_levels -= z_level
 		free_zones -= placement
 
-	zone_connections = text2list(replacetext(text_zone_connections, " ", "\n")) //Convert the string back into a list
+	zone_connections = text2list(replacetext_char(text_zone_connections, " ", "\n")) //Convert the string back into a list
 
 	final_zone_connections.len = z_level_order.len
 

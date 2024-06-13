@@ -69,8 +69,8 @@
 
 	if(length(viewingcode))
 		// This piece of code is very important - it escapes quotation marks so string aren't cut off by the input element
-		var/showcode = replacetext(storedcode, "\\\"", "\\\\\"")
-		showcode = replacetext(storedcode, "\"", "\\\"")
+		var/showcode = replacetext_char(storedcode, "\\\"", "\\\\\"")
+		showcode = replacetext_char(storedcode, "\"", "\\\"")
 
 		for(var/mob/M in viewingcode)
 
@@ -235,8 +235,8 @@
 					winshow(editingcode, "Telecomms IDE", 1) // show the IDE
 					winset(editingcode, "tcscode", "is-disabled=false")
 					winset(editingcode, "tcscode", "text=\"\"")
-					var/showcode = replacetext(storedcode, "\\\"", "\\\\\"")
-					showcode = replacetext(storedcode, "\"", "\\\"")
+					var/showcode = replacetext_char(storedcode, "\\\"", "\\\\\"")
+					showcode = replacetext_char(storedcode, "\"", "\\\"")
 					winset(editingcode, "tcscode", "text=\"[showcode]\"")
 
 				else
@@ -244,7 +244,7 @@
 					winshow(usr, "Telecomms IDE", 1) // show the IDE
 					winset(usr, "tcscode", "is-disabled=true")
 					winset(editingcode, "tcscode", "text=\"\"")
-					var/showcode = replacetext(storedcode, "\"", "\\\"")
+					var/showcode = replacetext_char(storedcode, "\"", "\\\"")
 					winset(usr, "tcscode", "text=\"[showcode]\"")
 
 			if("togglerun")

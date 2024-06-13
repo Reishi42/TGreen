@@ -13,42 +13,42 @@
 		return
 	switch(act)
 		if ("alarm")
-			message = "<B>[src]</B> издаёт сигнал."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("alert")
-			message = "<B>[src]</B> издаёт печальный звук."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("beep")
-			message = "<B>[src]</B> сигналит."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> моргает." //goddamn it mmi pls no
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ." //goddamn it mmi pls no
 			m_type = 1
 
 		if ("boop")
-			message = "<B>[src]</B> сигналит."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("flash")
-			message = "Индикаторы на <B>[src]</B> мигают."
+			message = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ <B>[src]</B> пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 1
 
 		if ("notice")
-			message = "<B>[src]</B> издаёт громкий сигнал."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("whistle")
-			message = "<B>[src]</B> пищит."
+			message = "<B>[src]</B> пїЅпїЅпїЅпїЅпїЅ."
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций дл&#255; ММИ. Вы можете использовать их, набрав \"*emote\" в \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
+			src << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ&#255; пїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ \"*emote\" пїЅ \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
 
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅ&#255; '[act]'. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"*help\" пїЅ \"say\" пїЅпїЅ&#255; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</span>"
 
 	if (message)
 		log_emote("[ckey]/[name] : [message]")

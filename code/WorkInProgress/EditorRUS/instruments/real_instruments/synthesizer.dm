@@ -151,9 +151,9 @@
 		if (length(code) > 10000)
 			blame << "This code is WAAAAY too long."
 			return
-		code = replacetext(code, " ", "")
-		code = replacetext(code, "(", "")
-		code = replacetext(code, ")", "")
+		code = replacetext_char(code, " ", "")
+		code = replacetext_char(code, "(", "")
+		code = replacetext_char(code, ")", "")
 
 		var/list/instruments_ids = list()
 		var/list/datum/instrument/instruments_by_id = list()

@@ -211,7 +211,7 @@ proc/isorgan(A)
 proc/slur(phrase)
 	var/output = ""
 
-	for(var/i = 1; i <= lentext(phrase); i++)
+	for(var/i = 1; i <= length(phrase); i++)
 		var/letter = copytext(phrase, i, i + 1)
 		if(letter == " ")
 			output += " "
@@ -219,19 +219,19 @@ proc/slur(phrase)
 		if(letter == "&")
 			letter = "&#255;"
 			i += 5
-		if(letter == "Я")
-			output += "Я"
+		if(letter == "пїЅ")
+			output += "пїЅ"
 			continue
 		if(prob(33))
-			if(lowerrustext(letter)=="о")	letter="у"
-			if(lowerrustext(letter)=="ы")	letter="i"
-			if(lowerrustext(letter)=="р")	letter="r"
-			if(lowerrustext(letter)=="л")	letter="ль"
-			if(lowerrustext(letter)=="з")	letter="с"
-			if(lowerrustext(letter)=="в")	letter="ф"
-			if(lowerrustext(letter)=="б")	letter="п"
-			if(lowerrustext(letter)=="г")	letter="х"
-			if(lowerrustext(letter)=="д")	letter="т"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="i"
+			if(lowerrustext(letter)=="пїЅ")	letter="r"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅпїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
+			if(lowerrustext(letter)=="пїЅ")	letter="пїЅ"
 
 		switch(rand(1,15))
 			if(1,3,5,8)		letter = "[lowerrustext(letter)]"
@@ -252,7 +252,7 @@ proc/slur(phrase)
 		var/first_letter = copytext(word, 1, 2)
 		if(first_letter == "&")
 			first_letter = "&#255;"
-		if(upperrustext(first_letter) in list("Б","В","Г","Д","Ж","З","К","Л","М","Н","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ"))
+		if(upperrustext(first_letter) in list("пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ","пїЅ"))
 			switch(rand(1,3))
 				if(1)
 					word = "[first_letter]-[word] "
@@ -264,15 +264,15 @@ proc/slur(phrase)
 	return output
 
 /proc/derpspeech(message, stuttering)
-	message = replacetext(message, " am ", " ")
-	message = replacetext(message, " is ", " ")
-	message = replacetext(message, " are ", " ")
-	message = replacetext(message, "you", "u")
-	message = replacetext(message, "help", "halp")
-	message = replacetext(message, "grief", "grife")
-	message = replacetext(message, "space", "spess")
-	message = replacetext(message, "carp", "crap")
-	message = replacetext(message, "reason", "raisin")
+	message = replacetext_char(message, " am ", " ")
+	message = replacetext_char(message, " is ", " ")
+	message = replacetext_char(message, " are ", " ")
+	message = replacetext_char(message, "you", "u")
+	message = replacetext_char(message, "help", "halp")
+	message = replacetext_char(message, "grief", "grife")
+	message = replacetext_char(message, "space", "spess")
+	message = replacetext_char(message, "carp", "crap")
+	message = replacetext_char(message, "reason", "raisin")
 /*	if(prob(50))
 		message = uppertext(message)
 		if()
