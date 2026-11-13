@@ -294,6 +294,8 @@
 
 	var/freqnum = text2num(freq) //Why should we call text2num three times when we can just do it here?
 	var/turf/position = get_turf(src)
+	if(!position)
+		return
 
 	//#### Tagging the signal with all appropriate identity values ####//
 
