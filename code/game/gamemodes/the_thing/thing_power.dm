@@ -29,7 +29,7 @@ var/list/ability_paths
 	if(!ishuman(user)&&!istype(user, /mob/living/simple_animal/hostile/the_thing))// && !ismonkey(user)) //typecast everything from mob to carbon from this point onwards
 		return 0
 	if(req_human && !ishuman(user))
-		user << "<span class='warning'>Ìû íå ìîæåì ñäåëàòü ýòîãî â äàííîé ôîðìå!</span>"
+		user << "<span class='warning'>Мы не можем сделать этого в данной форме!</span>"
 		return 0
 
 	return 1

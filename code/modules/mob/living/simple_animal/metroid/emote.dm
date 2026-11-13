@@ -15,41 +15,41 @@
 
 	switch(act) //Alphabetical please
 		if("bounce")
-			message = "<B>The [src.name]</B> ������������ �� �����."
+			message = "<B>The [src.name]</B> подпрыгивает на месте."
 			m_type = 1
 
 		if("jiggle")
-			message = "<B>The [src.name]</B> �����������&#255;!"
+			message = "<B>The [src.name]</B> покачиваетс&#255;!"
 			m_type = 1
 
 		if("light")
-			message = "<B>The [src.name]</B> ���������&#255; �� ���������, �� �����."
+			message = "<B>The [src.name]</B> засветилс&#255; на мгновение, но погас."
 			m_type = 1
 
 		if("moan")
-			message = "<B>The [src.name]</B> ������."
+			message = "<B>The [src.name]</B> стонет."
 			m_type = 2
 
 		if("shiver")
-			message = "<B>The [src.name]</B> ������."
+			message = "<B>The [src.name]</B> дрожит."
 			m_type = 2
 
 		if("sway")
-			message = "<B>The [src.name]</B> �������&#255;."
+			message = "<B>The [src.name]</B> шатаетс&#255;."
 			m_type = 1
 
 		if("twitch")
-			message = "<B>The [src.name]</B> ��������&#255;."
+			message = "<B>The [src.name]</B> дергаетс&#255;."
 			m_type = 1
 
 		if("vibrate")
-			message = "<B>The [src.name]</B> ���������!"
+			message = "<B>The [src.name]</B> вибрирует!"
 
 		if ("help") //This is an exception
-			src << "������ ������ ��&#255; ���������. �� ������ ������������ ��, ������ \"*emote\" � \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
+			src << "Список эмоций дл&#255; метроидов. Вы можете использовать их, набрав \"*emote\" в \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
 
 		else
-			src << "<span class='notice'>�������������&#255; �����&#255; '[act]'. �������� \"*help\" � \"say\" ��&#255; ������� ������.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
 
 	if ((message && stat == CONSCIOUS))
 		if(client)

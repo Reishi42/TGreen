@@ -382,8 +382,6 @@ atom/proc/generate_female_clothing(index,t_color,icon,type)
 		if(H.w_uniform == src)
 			H.update_suit_sensors()
 
-	..()
-
 /obj/item/clothing/under/AltClick(mob/user)
 	if(in_range(src,user) && !user.stat)
 		rolldown()
@@ -413,7 +411,6 @@ atom/proc/generate_female_clothing(index,t_color,icon,type)
 		usr << "<span class='notice'>You adjust the suit to wear it more casually.</span>"
 		src.adjusted = 1
 	usr.update_inv_w_uniform()
-	..()
 
 /obj/item/clothing/under/examine(mob/user)
 	..()

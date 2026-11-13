@@ -7,10 +7,10 @@
 	origin_tech = "magnets=1"
 	flags = HEAR
 	attachable = 1
-	verb_say = "���������"
+	verb_say = "оповещает"
 	verb_engsay = "alerts"
-	verb_ask = "���������"
-	verb_exclaim = "���������"
+	verb_ask = "оповещает"
+	verb_exclaim = "оповещает"
 	var/listening = 0
 	var/recorded = "" //the activation message
 

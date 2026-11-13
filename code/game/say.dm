@@ -64,9 +64,9 @@ var/list/freqtospan = list(
 
 /atom/movable/proc/say_quote(input, list/spans)
 	if(!input)
-		return "ãîâîðèò, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
-	var/ending = copytext_char(input, length(input))
-	if(copytext_char(input, length(input) - 1) == "!!")
+		return "говорит, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
+	var/ending = copytext_char(input, length_char(input))
+	if(copytext_char(input, length_char(input) - 1) == "!!")
 		if(islist(spans))
 			spans |= SPAN_YELL
 			return "[verb_yell], \"[attach_spans(input, spans)]\""
@@ -94,17 +94,17 @@ var/list/freqtospan = list(
 		else
 			return speaker.say_quote(stars(raw_message), spans)
 	else if(message_langs & MONKEY)
-		return "�������."
+		return "щебечет."
 	else if(message_langs & ALIEN)
-		return "�����."
+		return "шипит."
 	else if(message_langs & ROBOT)
-		return "����� ������."
+		return "издаёт сигнал."
 	else if(message_langs & DRONE)
-		return "����� ������."
+		return "издаёт сигнал."
 	else if(message_langs & CAT)
-		return "������."
+		return "мурчит."
 	else
-		return "����� �������� ����."
+		return "издаёт странный звук."
 
 /proc/get_radio_span(freq)
 	var/returntext = freqtospan["[freq]"]
@@ -129,7 +129,7 @@ var/list/freqtospan = list(
 	return output
 
 /mob/living/proc/say_test(var/text)
-	var/ending = copytext(text, length(text))
+	var/ending = copytext_char(text, length_char(text))
 	if (ending == "?")
 		return "1"
 	else if (ending == "!")

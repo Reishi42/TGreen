@@ -211,27 +211,27 @@ proc/isorgan(A)
 proc/slur(phrase)
 	var/output = ""
 
-	for(var/i = 1; i <= length(phrase); i++)
-		var/letter = copytext(phrase, i, i + 1)
+	for(var/i = 1; i <= length_char(phrase); i++)
+		var/letter = copytext_char(phrase, i, i + 1)
 		if(letter == " ")
 			output += " "
 			continue
 		if(letter == "&")
 			letter = "&#255;"
 			i += 5
-		if(letter == "�")
-			output += "�"
+		if(letter == "Я")
+			output += "Я"
 			continue
 		if(prob(33))
-			if(lowerrustext(letter)=="�")	letter="�"
-			if(lowerrustext(letter)=="�")	letter="i"
-			if(lowerrustext(letter)=="�")	letter="r"
-			if(lowerrustext(letter)=="�")	letter="��"
-			if(lowerrustext(letter)=="�")	letter="�"
-			if(lowerrustext(letter)=="�")	letter="�"
-			if(lowerrustext(letter)=="�")	letter="�"
-			if(lowerrustext(letter)=="�")	letter="�"
-			if(lowerrustext(letter)=="�")	letter="�"
+			if(lowerrustext(letter)=="о")	letter="у"
+			if(lowerrustext(letter)=="ы")	letter="i"
+			if(lowerrustext(letter)=="р")	letter="r"
+			if(lowerrustext(letter)=="л")	letter="ль"
+			if(lowerrustext(letter)=="з")	letter="с"
+			if(lowerrustext(letter)=="в")	letter="ф"
+			if(lowerrustext(letter)=="б")	letter="п"
+			if(lowerrustext(letter)=="г")	letter="х"
+			if(lowerrustext(letter)=="д")	letter="т"
 
 		switch(rand(1,15))
 			if(1,3,5,8)		letter = "[lowerrustext(letter)]"
@@ -249,10 +249,10 @@ proc/slur(phrase)
 	var/output = ""
 
 	for(var/word in unstuttered_words)
-		var/first_letter = copytext(word, 1, 2)
+		var/first_letter = copytext_char(word, 1, 2)
 		if(first_letter == "&")
 			first_letter = "&#255;"
-		if(upperrustext(first_letter) in list("�","�","�","�","�","�","�","�","�","�","�","�","�","�","�","�","�","�","�","�"))
+		if(upperrustext(first_letter) in list("Б","В","Г","Д","Ж","З","К","Л","М","Н","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ"))
 			switch(rand(1,3))
 				if(1)
 					word = "[first_letter]-[word] "
@@ -286,9 +286,9 @@ proc/slur(phrase)
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
 	var/returntext = ""
-	for(var/i = 1, i <= length(t), i++)
+	for(var/i = 1, i <= length_char(t), i++)
 
-		var/letter = copytext(t, i, i+1)
+		var/letter = copytext_char(t, i, i+1)
 		if(prob(50))
 			if(p >= 70)
 				letter = ""

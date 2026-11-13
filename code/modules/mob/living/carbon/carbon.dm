@@ -3,7 +3,6 @@
 	prepare_data_huds()
 
 /mob/living/carbon/proc/prepare_data_huds()
-	..()
 	med_hud_set_health()
 	med_hud_set_status()
 

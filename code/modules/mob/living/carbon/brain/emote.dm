@@ -13,42 +13,42 @@
 		return
 	switch(act)
 		if ("alarm")
-			message = "<B>[src]</B> ����� ������."
+			message = "<B>[src]</B> издаёт сигнал."
 			m_type = 2
 
 		if ("alert")
-			message = "<B>[src]</B> ����� ��������� ����."
+			message = "<B>[src]</B> издаёт печальный звук."
 			m_type = 2
 
 		if ("beep")
-			message = "<B>[src]</B> ��������."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> �������." //goddamn it mmi pls no
+			message = "<B>[src]</B> моргает." //goddamn it mmi pls no
 			m_type = 1
 
 		if ("boop")
-			message = "<B>[src]</B> ��������."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("flash")
-			message = "���������� �� <B>[src]</B> ������."
+			message = "Индикаторы на <B>[src]</B> мигают."
 			m_type = 1
 
 		if ("notice")
-			message = "<B>[src]</B> ����� ������� ������."
+			message = "<B>[src]</B> издаёт громкий сигнал."
 			m_type = 2
 
 		if ("whistle")
-			message = "<B>[src]</B> �����."
+			message = "<B>[src]</B> пищит."
 			m_type = 2
 
 		if ("help")
-			src << "������ ������ ��&#255; ���. �� ������ ������������ ��, ������ \"*emote\" � \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
+			src << "Список эмоций дл&#255; ММИ. Вы можете использовать их, набрав \"*emote\" в \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
 
 		else
-			src << "<span class='notice'>�������������&#255; �����&#255; '[act]'. �������� \"*help\" � \"say\" ��&#255; ������� ������.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
 
 	if (message)
 		log_emote("[ckey]/[name] : [message]")

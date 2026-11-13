@@ -853,7 +853,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/icon/atom_icon = new(A.icon, A.icon_state)
 
 	if(!letter)
-		letter = copytext(A.name, 1, 2)
+		letter = copytext_char(A.name, 1, 2)
 		if(uppercase == 1)
 			letter = uppertext(letter)
 		else if(uppercase == -1)

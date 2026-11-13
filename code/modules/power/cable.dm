@@ -615,7 +615,6 @@ obj/structure/cable/proc/avail()
 		src.use(15)
 	else
 		usr << "<span class='warning'>You cannot do that!</span>"
-	..()
 
 /obj/item/stack/cable_coil/verb/make_ascensive_cable()
 	set name = "Lay ascensive cable"

@@ -10,11 +10,11 @@ notifications:
     on_start: never     # options: [always|never|change] default: always
 
 env:
-    global:
-    - BYOND_MAJOR="512"
-    - BYOND_MINOR="1416"
-    matrix:
+  global:
     - DM_MAPFILE="metastation"
+  matrix:
+    - BYOND_MAJOR="515" BYOND_MINOR="1647"
+    - BYOND_MAJOR="516" BYOND_MINOR="1684"
 
 cache:
   directories:
@@ -28,13 +28,11 @@ addons:
       - libstdc++6:i386
 
 before_script:
-  - chmod +x ./install-byond.sh 
+  - chmod +x ./install-byond.sh
   - ./install-byond.sh
 
 script:
   - (! grep 'step_[xy]' _maps/**/*.dmm)
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - bash dm.sh -M${DM_MAPFILE} tgstation.dme
-
-after_script:
   - DreamDaemon tgstation.dmb -safe -params testlaunch

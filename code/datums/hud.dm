@@ -1,18 +1,19 @@
 /* HUD DATUMS */
 
 //GLOBAL HUD LIST
-var/datum/atom_hud/huds = list( \
-	DATA_HUD_SECURITY_BASIC = new/datum/atom_hud/data/security/basic(), \
-	DATA_HUD_SECURITY_ADVANCED = new/datum/atom_hud/data/security/advanced(), \
-	DATA_HUD_MEDICAL_BASIC = new/datum/atom_hud/data/medical/basic(), \
-	DATA_HUD_MEDICAL_ADVANCED = new/datum/atom_hud/data/medical/advanced(), \
-	ANTAG_HUD_CULT = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_REV = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_OPS = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_GANG_A = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_GANG_B = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_WIZ = new/datum/atom_hud/antag(), \
-	ANTAG_HUD_SHADOW = new/datum/atom_hud/antag(), \
+// Keep this order synchronized with the numeric HUD constants in code/__DEFINES/hud.dm.
+var/list/huds = list( \
+	new/datum/atom_hud/data/security/basic(), \
+	new/datum/atom_hud/data/security/advanced(), \
+	new/datum/atom_hud/data/medical/basic(), \
+	new/datum/atom_hud/data/medical/advanced(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
+	new/datum/atom_hud/antag(), \
 	)
 
 /datum/atom_hud

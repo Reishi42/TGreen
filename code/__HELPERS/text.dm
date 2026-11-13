@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext_char(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext_char(sqltext, 2, -1);//Quote() adds quotes around input, we already do that
 
 /proc/format_table_name(var/table as text)
 	return sqlfdbktableprefix + table
@@ -30,32 +30,22 @@
 	var/list/strip_chars = list("<",">")
 	t = copytext_char(t,1,limit)
 	for(var/char in strip_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext_char(t, 1, index) + copytext_char(t, index+1)
-			index = findtext(t, char)
+		t = replacetext_char(t, char, "")
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "�"="&#255;"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "я"="&#255;"))
 	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext_char(t, 1, index) + repl_chars[char] + copytext_char(t, index+1)
-			index = findtext(t, char, index+1)
+		t = replacetext_char(t, char, repl_chars[char])
 	return t
 
 proc/sanitize_russian(var/msg, var/html = 0)
-    var/rep
-    if(html)
-        rep = "&#1103;"
-    else
-        rep = "&#255;"
-    var/index = findtext(msg, "�")
-    while(index)
-        msg = copytext_char(msg, 1, index) + rep + copytext_char(msg, index + 1)
-        index = findtext(msg, "�")
-    return msg
+	var/rep
+	if(html)
+		rep = "&#1103;"
+	else
+		rep = "&#255;"
+	return replacetext_char(msg, "я", rep)
 
 proc/russian_html2text(msg)
     return replacetext_char(msg, "&#1103;", "&#255;")
@@ -85,7 +75,7 @@ proc/russian_text2html(msg)
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-	//		if(127 to 255)	return			//rejects weird letters like �
+	//		if(127 to 255)	return			//rejects non-ASCII characters
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -158,7 +148,7 @@ proc/russian_text2html(msg)
 	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		t_out = copytext_char(t_out,1,length(t_out))	//removes the last character (in this case a space)
+		t_out = copytext_char(t_out,1,length_char(t_out))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
 		if(cmptext(t_out,bad_name))	return	//(not case sensitive)
@@ -175,8 +165,8 @@ proc/russian_text2html(msg)
 		input = copytext_char(input,1,max_length)
 
 	var/sanitized_output
-	var/next_html_tag = findtext(input, "<")
-	var/next_http = findtext(input, "http", 1, next_html_tag)
+	var/next_html_tag = findtext_char(input, "<")
+	var/next_http = findtext_char(input, "http", 1, next_html_tag)
 
 	//the opening and closing of the expression to skip, e.g '<' and '>'
 	var/opening = non_zero_min(next_html_tag, next_http)
@@ -188,20 +178,20 @@ proc/russian_text2html(msg)
 
 		//we treat < ... >
 		if(opening == next_html_tag)
-			closing = findtext(input, ">", opening + 1)
+			closing = findtext_char(input, ">", opening + 1)
 			if(closing)
-				next_html_tag = findtext(input, "<", closing)
-				next_http = findtext(input, "http", closing, next_html_tag)
+				next_html_tag = findtext_char(input, "<", closing)
+				next_http = findtext_char(input, "http", closing, next_html_tag)
 			else //no matching ">"
 				next_html_tag = 0
 
 		//we treat "http(s)://"
 		else
-			closing = findtext(input, "://", opening + 1)
+			closing = findtext_char(input, "://", opening + 1)
 			if(closing)
 				closing += 2 //skip these extra //
-				next_http = findtext(input, "http", closing)
-				next_html_tag = findtext(input, "<", closing, next_http)
+				next_http = findtext_char(input, "http", closing)
+				next_html_tag = findtext_char(input, "<", closing, next_http)
 			else //no matching "://"
 				next_http = 0
 
@@ -286,15 +276,15 @@ proc/russian_text2html(msg)
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
-	for (var/i = 1 to length(text))
-		if (text2ascii(text, i) > 32)
+	for (var/i = 1 to length_char(text))
+		if (text2ascii_char(text, i) > 32)
 			return copytext_char(text, i)
 	return ""
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
-		if (text2ascii(text, i) > 32)
+	for (var/i = length_char(text), i > 0, i--)
+		if (text2ascii_char(text, i) > 32)
 			return copytext_char(text, 1, i + 1)
 
 	return ""
@@ -313,7 +303,7 @@ proc/russian_text2html(msg)
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
 	var/new_message = message
-	var/size = length(message)
+	var/size = length_char(message)
 	var/delta = length - size
 	if(size == length)
 		return new_message
@@ -329,7 +319,7 @@ proc/russian_text2html(msg)
 
 //Limits the length of the text. Note: MAX_MESSAGE_LEN and MAX_NAME_LEN are widely used for this purpose
 /proc/dd_limittext(message, length)
-	var/size = length(message)
+	var/size = length_char(message)
 	if(size <= length)
 		return message
 	return copytext_char(message, 1, length + 1)
@@ -340,9 +330,9 @@ proc/russian_text2html(msg)
 //is in the other string at the same spot (assuming it is not a replace char).
 //This is used for fingerprints
 	var/newtext = text
-	if(length(text) != length(compare))
+	if(length_char(text) != length_char(compare))
 		return 0
-	for(var/i = 1, i < length(text), i++)
+	for(var/i = 1, i < length_char(text), i++)
 		var/a = copytext_char(text,i,i+1)
 		var/b = copytext_char(compare,i,i+1)
 //if it isn't both the same letter, or if they are both the replacement character
@@ -362,7 +352,7 @@ proc/russian_text2html(msg)
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= length(text), i++)
+	for(var/i = 1, i <= length_char(text), i++)
 		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
@@ -370,7 +360,7 @@ proc/russian_text2html(msg)
 
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
+	for(var/i = length_char(text); i > 0; i--)
 		new_text += copytext_char(text, i, i+1)
 	return new_text
 
@@ -485,7 +475,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "�")
+	var/list/c = text2list(msg, "я")
 	if(c.len == 1)
 		return html_encode(msg)
 	var/out = ""
@@ -503,7 +493,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "�")
+	var/list/c = text2list(msg, "я")
 	if(c.len == 1)
 		return html_decode(msg)
 	var/out = ""
@@ -559,27 +549,12 @@ var/list/binary = list("0","1")
 	return text
 
 /proc/upperrustext(text as text)
-	var/t = ""
-	for(var/i = 1, i <= length(text), i++)
-		var/a = text2ascii(text, i)
-		if (a > 223)
-			t += ascii2text(a - 32)
-		else if (a == 184)
-			t += ascii2text(168)
-		else t += ascii2text(a)
-	t = replacetext_char(t,"&#255;","�")
-	t = replacetext_char(t, "�", "�")
+	var/t = uppertext(text)
+	t = replacetext_char(t,"&#255;","Я")
 	return t
 
 
 /proc/lowerrustext(text as text)
-	var/t = ""
-	for(var/i = 1, i <= length(text), i++)
-		var/a = text2ascii(text, i)
-		if (a > 191 && a < 224)
-			t += ascii2text(a + 32)
-		else if (a == 168)
-			t += ascii2text(184)
-		else t += ascii2text(a)
-	t = replacetext_char(t,"�","&#255;")
+	var/t = replacetext_char(text,"Я","&#255;")
+	t = lowertext(t)
 	return t
