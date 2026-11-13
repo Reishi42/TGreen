@@ -34,21 +34,18 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "я"="&#255;"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#"))
 	for(var/char in repl_chars)
 		t = replacetext_char(t, char, repl_chars[char])
 	return t
 
 proc/sanitize_russian(var/msg, var/html = 0)
-	var/rep
 	if(html)
-		rep = "&#1103;"
-	else
-		rep = "&#255;"
-	return replacetext_char(msg, "я", rep)
+		return replacetext_char(msg, "я", "&#1103;")
+	return msg
 
 proc/russian_html2text(msg)
-    return replacetext_char(msg, "&#1103;", "&#255;")
+	return replacetext_char(msg, "&#1103;", "я")
 
 proc/russian_text2html(msg)
 	return replacetext_char(msg, "&#255;", "&#1103;")
@@ -469,42 +466,11 @@ var/list/binary = list("0","1")
 	return t
 
 /proc/rhtml_encode(var/msg, var/html = 0)
-	msg = html_decode(msg)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "я")
-	if(c.len == 1)
-		return html_encode(msg)
-	var/out = ""
-	var/first = 1
-	for(var/text in c)
-		if(!first)
-			out += rep
-		first = 0
-		out += html_encode(text)
-	return out
+	// Unicode strings do not need the old CP1251 workaround for the letter ya.
+	return html_encode(html_decode(msg))
 
 /proc/rhtml_decode(var/msg, var/html = 0)
-	var/rep
-	if(html)
-		rep = "&#x44F;"
-	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "я")
-	if(c.len == 1)
-		return html_decode(msg)
-	var/out = ""
-	var/first = 1
-	for(var/text in c)
-		if(!first)
-			out += rep
-			first = 0
-		out += html_decode(text)
-
-	return out
+	return html_decode(msg)
 
 /*
 /proc/reject_bad_endings(text as text)
@@ -555,6 +521,4 @@ var/list/binary = list("0","1")
 
 
 /proc/lowerrustext(text as text)
-	var/t = replacetext_char(text,"Я","&#255;")
-	t = lowertext(t)
-	return t
+	return lowertext(text)
