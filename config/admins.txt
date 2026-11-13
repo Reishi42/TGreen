@@ -29,3 +29,4 @@ editorrus - Game Master
 joctopus - Host
 qwertyon - Host
 maxsc - Host
+DosiOzborn - Host

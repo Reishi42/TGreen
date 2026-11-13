@@ -1,5 +1,5 @@
 ## Server name: This appears at the top of the screen in-game. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-SERVERNAME Main Russian Servers [SS13.RU] - White Dream
+SERVERNAME TGreen
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
 #STATIONNAME 
@@ -144,6 +144,8 @@ ALLOW_HOLIDAYS
 
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
 TICKLAG 0.5
+
+FPS 30
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 0
